@@ -1,141 +1,23 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="transistions.css">
-
-
-
-    <!-- Icons & misc -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-d5uMBra0dI0eWkxyv2j/YfdCbNvH4uRlUs8VXEeNfJAjiqEeMGO9tU1bF4iS8B1" crossorigin="anonymous">
-
-    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.4.0/remixicon.css" crossorigin="">
-
-
-</head>
-<body>
-
-    <div class="transition transition-1 is-active"></div>
-    <header>
-        <h2 class="logo"><img src="own_pics/logo.png"></h2>
-        <nav class="navigation">
-            <a href="index.html" class="active">Home</a>
-            <a href="about.html">About Me</a>
-            <a href="education.html">Education & Achivements</a>
-            <a href="interests.html">Interests</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-
-        <div class="toggle-btn">&#9776;</div>
-
-        <div class="dropdown-menu">
-            <li>
-                <a href="index.html" class="active">Home</a>
-                <a href="about.html">About Me</a>
-                <a href="education.html">Education & Achivements</a>
-                <a href="interests.html">Interests</a>
-                <a href="contact.html">Contact</a>
-            </li>
-        </div>
-    </header>
-    
-
-    <script>
-        const toggleBtn = document.querySelector('.toggle-btn');
-        const toggleBtnIcon = document.querySelector('.toggle-btn');
-        const dropDownMenu = document.querySelector('.dropdown-menu');
-
-        toggleBtn.onclick = function () {
-            dropDownMenu.classList.toggle('open');
-            const isOpen = dropDownMenu.classList.contains('open');
-
-            toggleBtnIcon.innerHTML = isOpen
-            ? '&#10006;' // X (cross) icon
-            : '&#9776;'; // Default hamburger icon
-        };
-    </script>
-
-
-    <section class="parallax">
-        
-        <img src="own_pics/sky.png" id="sky">
-        
-        <img src="own_pics/sun.png" id="sun">
-        <img src="own_pics/mountains.png" id="mountains">
-        <img src="own_pics/valley1.png" id="valley1">
-        <img src="own_pics/valley2.png" id="valley2">
-        
-        <img src="own_pics/birds.png" id="birds">
-        <h1 id="text">Swathi Kulkarni</h1>
-        
-        <button class="get-started-button" id="button" style="opacity: 0;">Get Started</button>
-        <img src="own_pics/valley3.png" id="valley3">
-        <img src="own_pics/valley4.png" id="valley4">
-
-    </section>
-
-    <section class="sec" id="revealSection">
-        <br><br><br>
-        <h1 class="title">Programmer. &nbsp;&nbsp;Photographer.</h1>
-        <br><br><br>
-        <div class="main-details-container">
-            <div class="about-containers">
-
-
-              <div class="details-container color-container" onclick="location.href='about.html'">
-                <a href="about.html" style="text-decoration: none;">
-                <div class="article-container">
-                  <img src="own_pics/logo.jpg" alt="About Me" class="details-img">
-                </div>
-                <br>
-                <div class="btn-container">
-                    <button class="btn btn-color-2 details-btn" style="font-size: 25px;">About Me</button>
-                </div>
-            </a>
-              </div>
-
-
-
-              <div class="details-container color-container" onclick="location.href='education.html'">
-                <a href="education.html" style="text-decoration: none;">
-                <div class="article-container">
-                    <img src="own_pics/education_pic.png" alt="Education" class="details-img"> 
-                </div>
-                <br>
-                <div class="btn-container">
-                  <button class="btn btn-color-2 details-btn" style="font-size: 25px;"> 
-                    Education
-                  </button>
-                </div>
-            </a>
-              </div>
-
-              
-              <div class="details-container color-container"  onclick="location.href='interests.html'">
-                <a href="education.html" style="text-decoration: none;"></a>
-                <div class="article-container">
-                  <img src="own_pics/photo_me.jpg" alt="Interests" class="details-img">
-                </div>
-                <br>
-                <div class="btn-container">
-                    <button class="btn btn-color-2 details-btn"  style="font-size: 25px;">Interests</button>
-                </div>
-            </a>
-              </div>
-            </div>
-          </div>
-
-    </section>
-
-    
-    <script src="script.js"></script>
-    <script src="transistions_main.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swathi Kulkarni — Portfolio</title>
+    <meta
+      name="description"
+      content="Portfolio of Swathi Kulkarni — programmer and photographer."
+    />
+    <link rel="icon" type="image/png" href="./images/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

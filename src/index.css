@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+/* ============================================================
+   THEME — warm, earthy palette pulled from the hand-drawn
+   parallax artwork. Change colors here to retheme the site.
+   ============================================================ */
+
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+
+  /* Brand colors (used as bg-espresso, text-clay, etc.) */
+  --color-espresso: #241c1c;
+  --color-espresso-light: #382e2e;
+  --color-clay: #916f6f;
+  --color-clay-light: #b89a9a;
+  --color-cream: #f7f2ec;
+  --color-sand: #e3dedb;
+
+  /* shadcn/ui semantic colors */
+  --color-background: #f7f2ec;
+  --color-foreground: #241c1c;
+  --color-card: #fffdfa;
+  --color-card-foreground: #241c1c;
+  --color-popover: #fffdfa;
+  --color-popover-foreground: #241c1c;
+  --color-primary: #241c1c;
+  --color-primary-foreground: #f7f2ec;
+  --color-secondary: #e9e1d8;
+  --color-secondary-foreground: #241c1c;
+  --color-muted: #ede6df;
+  --color-muted-foreground: #6e5f5a;
+  --color-accent: #916f6f;
+  --color-accent-foreground: #ffffff;
+  --color-destructive: #b3261e;
+  --color-destructive-foreground: #ffffff;
+  --color-border: #ddd0c4;
+  --color-input: #ddd0c4;
+  --color-ring: #916f6f;
+
+  --radius-lg: 1rem;
+  --radius-md: 0.75rem;
+  --radius-sm: 0.5rem;
+
+  /* ---------- "Alive" animations for the parallax & UI ---------- */
+
+  /* Birds gently bobbing while they glide */
+  --animate-bob: bob 5s ease-in-out infinite;
+  @keyframes bob {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-14px);
+    }
+  }
+
+  /* Sun softly breathing (warm glow swells and fades) */
+  --animate-sun-breathe: sun-breathe 7s ease-in-out infinite;
+  @keyframes sun-breathe {
+    0%,
+    100% {
+      filter: drop-shadow(0 0 18px rgba(255, 196, 120, 0.35));
+      transform: scale(1);
+    }
+    50% {
+      filter: drop-shadow(0 0 55px rgba(255, 186, 100, 0.75));
+      transform: scale(1.012);
+    }
+  }
+
+  /* Sky breathing very slowly */
+  --animate-sky-breathe: sky-breathe 26s ease-in-out infinite alternate;
+  @keyframes sky-breathe {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.035);
+    }
+  }
+
+  /* Fireflies drifting up through the valley */
+  --animate-firefly: firefly 9s ease-in-out infinite;
+  @keyframes firefly {
+    0% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0;
+    }
+    12% {
+      opacity: 0.9;
+    }
+    60% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: translate(14px, -26vh) scale(0.5);
+      opacity: 0;
+    }
+  }
+
+  /* Mouse-wheel dot inside the scroll cue */
+  --animate-wheel: wheel 1.6s ease-in-out infinite;
+  @keyframes wheel {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    70% {
+      transform: translateY(16px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(16px);
+      opacity: 0;
+    }
+  }
+
+  /* Skills marquee on the homepage */
+  --animate-marquee: marquee 30s linear infinite;
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Slow-rotating gradient blob behind the About photo */
+  --animate-spin-slow: spin 16s linear infinite;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-background text-foreground font-sans antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-clay);
+  color: white;
+}
+
+/* ---------- Floating scrollbar (no track) ----------
+   The track is fully transparent; the thumb is a slim clay
+   pill inset with a transparent border (background-clip keeps
+   the gradient off the border), so it appears to float over
+   the page. It widens slightly when hovered/grabbed. */
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-clay) transparent;
+}
+
+/* Chrome / Edge / Safari */
+::-webkit-scrollbar {
+  width: 14px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    var(--color-clay-light),
+    var(--color-clay)
+  );
+  border-radius: 999px;
+  border: 5px solid transparent;
+  background-clip: padding-box;
+  min-height: 48px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  border-width: 3px;
+}
+
+::-webkit-scrollbar-thumb:active {
+  border-width: 2px;
+  background: var(--color-clay);
+  background-clip: padding-box;
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-bob,
+  .animate-sun-breathe,
+  .animate-sky-breathe,
+  .animate-firefly,
+  .animate-wheel,
+  .animate-marquee,
+  .animate-spin-slow {
+    animation: none;
+  }
+}
