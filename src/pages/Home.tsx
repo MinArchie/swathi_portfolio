@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, BookMarked, Briefcase, ExternalLink, Github, GraduationCap, Linkedin, MapPin, Sparkles, Trophy } from "lucide-react";
 import ParallaxHero from "@/components/ParallaxHero";
 import Reveal from "@/components/Reveal";
+import SkillIcon from "@/components/SkillIcon";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { asset } from "@/lib/utils";
@@ -121,7 +122,11 @@ export default function Home() {
               key={`${skill}-${i}`}
               className="flex items-center gap-10 whitespace-nowrap text-sm font-semibold uppercase tracking-widest text-white"
             >
-              {skill} <span className="text-cream/70">✦</span>
+              <span className="flex items-center gap-2.5">
+                <SkillIcon name={skill} className="size-4" />
+                {skill}
+              </span>
+              <span className="text-cream/70">✦</span>
             </span>
           ))}
         </div>

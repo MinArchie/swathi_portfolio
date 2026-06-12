@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Reveal from "@/components/Reveal";
+import SkillIcon from "@/components/SkillIcon";
 import { asset } from "@/lib/utils";
 import { site } from "@/data/site";
 
@@ -80,8 +81,9 @@ export default function About() {
                     <Badge
                       key={skill}
                       variant="secondary"
-                      className="px-3.5 py-1.5 text-sm transition-colors group-hover:bg-clay/15"
+                      className="gap-1.5 px-3.5 py-1.5 text-sm transition-colors group-hover:bg-clay/15"
                     >
+                      <SkillIcon name={skill} className="size-3.5 text-clay" />
                       {skill}
                     </Badge>
                   ))}
