@@ -34,13 +34,13 @@ export default function Home() {
               <Sparkles className="size-4" /> Hi, I'm Swathi
             </p>
             <h2 className="mt-4 font-display text-4xl font-semibold leading-tight sm:text-5xl">
-              I build web experiences that feel{" "}
-              <span className="text-clay-light italic">alive</span>.
+              Building secure systems & breaking <span className="text-clay-light italic">insecure</span> ones.
+              
             </h2>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-cream/80">
               {site.pitch}
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
+            <div className="mt-8 flex flex-nowrap items-center gap-3 overflow-x-auto">
               <Button asChild variant="accent" size="lg">
                 <Link to="/projects">
                   View projects <ArrowRight />
@@ -51,7 +51,7 @@ export default function Home() {
               </Button>
               {site.resume && (
                 <Button asChild variant="outline-light" size="lg">
-                  <a href={asset(site.resume)} target="_blank" rel="noreferrer">
+                  <a href={site.resume} target="_blank" rel="noreferrer">
                     Resume
                   </a>
                 </Button>

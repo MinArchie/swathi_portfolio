@@ -21,11 +21,11 @@ export type Publication = {
 
 export const publications: Publication[] = [
   {
-    title: "Your paper title — edit src/data/publications.ts",
-    venue: "IEEE Conference / Journal name",
-    year: "2025",
+    title: "Hardware-Level Emulation of Wi-Fi Clone Attacks with On-Device Intelligence using ESP32",
+    venue: "IEEE Xplore",
+    year: "2026",
     link: "https://ieeexplore.ieee.org/document/11544415",
     summary:
-      "One sentence on what the paper contributes (optional — delete this line to hide).",
+      "An IEEE-published embedded wireless security research project demonstrating ESP32-based Evil Twin Wi-Fi attacks using on-device machine learning, deauthentication, and rogue access point emulation.",
   },
 ];

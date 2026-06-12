@@ -1,34 +1,60 @@
-/**
- * ============================================================
- * SITE-WIDE INFO — edit this file to change your name, pitch,
- * skills, contact details, and social links everywhere.
- * ============================================================
- */
-
 export const site = {
   name: "Swathi Kulkarni",
-  tagline: "Programmer. Photographer.",
+  tagline: "Cybersecurity. Research. Engineering.",
 
   /** One-line role shown under your name and on the homepage. */
-  role: "B.Tech CSE (Hons) student @ RV University, Bengaluru",
+  role: "Cybersecurity Student & Software Engineering Intern @ RV University",
 
   /** The 10-second pitch recruiters read first. Keep it short. */
   pitch:
-    "Computer science undergrad who builds clean, interactive web experiences. I like turning ideas into working products — and I sweat the details, from the code to the pixels.",
+    "Cybersecurity-focused computer science undergraduate building secure systems, malware analysis tools, and embedded wireless security research projects with real-world engineering experience in backend and full stack development.",
 
   /** Longer story for the About page. */
   intro:
-    "Hello! I'm a computer science student passionate about coding in Python, C, HTML, CSS, and JavaScript. I specialize in web development, love solving problems, and enjoy building things that feel alive. This site's hand-drawn parallax artwork? Drew and animated it myself.",
+    "Hello! I'm a Computer Science undergraduate specializing in Cybersecurity at RV University. My work focuses on application security, malware analysis, wireless security, and secure backend systems. I've worked on projects ranging from real-time malicious JavaScript detection and malware analysis tooling to ESP32-based wireless security research published through IEEE. Alongside security research, I have industry experience building production full stack and backend systems at startups using modern web technologies.",
 
   /** One personality line (About page). */
   beyond:
-    "Off the keyboard, I'm usually behind a camera or writing — photography and storytelling keep my eye sharp for design.",
+    "Outside cybersecurity and development, I enjoy photography, writing, and exploring the intersection of design and technology.",
 
   /** Grouped skills (About page). The homepage marquee flattens these. */
   skillGroups: [
-    { label: "Languages", items: ["Python", "C", "JavaScript", "TypeScript"] },
-    { label: "Web", items: ["React", "HTML", "CSS", "Tailwind CSS"] },
-    { label: "Tools", items: ["Git & GitHub", "VS Code", "Linux"] },
+    {
+      label: "Languages",
+      items: ["Python", "TypeScript", "JavaScript", "C", "C++", "SQL"],
+    },
+    {
+      label: "Cybersecurity",
+      items: [
+        "Malware Analysis",
+        "Network Security",
+        "OWASP Principles",
+        "YARA",
+        "Authentication & Authorization",
+        "Wi-Fi Security",
+      ],
+    },
+    {
+      label: "Development",
+      items: [
+        "React",
+        "Node.js",
+        "Flask",
+        "Docker",
+        "Angular",
+        "TypeScript",
+      ],
+    },
+    {
+      label: "Tools & Platforms",
+      items: [
+        "Git & GitHub",
+        "Linux",
+        "ESP32",
+        "TensorFlow Lite",
+        "Kali Linux",
+      ],
+    },
   ],
 
   email: "swathi.shrirang.kulkarni@gmail.com",
@@ -42,7 +68,7 @@ export const site = {
    * Resume button (recruiters love this): drop your resume.pdf
    * into public/ and change this to "resume.pdf". Leave "" to hide.
    */
-  resume: "",
+  resume: "https://drive.google.com/file/d/1qpyoa1yTYepWkQ2Xsy4Y6Cf158QGxGcI/view?usp=sharing",
 
   copyrightYear: new Date().getFullYear(),
 };

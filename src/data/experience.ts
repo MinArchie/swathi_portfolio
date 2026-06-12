@@ -1,17 +1,3 @@
-/**
- * ============================================================
- * WORK EXPERIENCE — rendered on the Experience page; the
- * homepage snapshot counts these and lists role @ company.
- *
- * ⚠️ TODO: replace the two placeholder internships below with
- * your real ones.
- *
- * To ADD a job: copy a { ... } block, paste, edit.
- * To REMOVE one: delete its { ... } block.
- * Order: put the most recent first.
- * ============================================================
- */
-
 export type Experience = {
   role: string;
   company: string;
@@ -25,27 +11,44 @@ export type Experience = {
   tags?: string[];
 };
 
+
 export const experience: Experience[] = [
   {
-    role: "Software Development Intern",
-    company: "Company One — edit src/data/experience.ts",
-    location: "Bengaluru, KA",
-    period: "May 2025 – Jul 2025",
+    role: "Software Engineering Intern",
+    company: "Rescope",
+    location: "Remote • Berkeley, CA",
+    period: "Jun 2025 – Present",
     summary:
-      "One or two sentences about what you built or worked on during this internship.",
+      "Worked full time during Summer 2025 before continuing part time during the academic semester, building backend and full stack systems for a real estate permit management platform.",
     highlights: [
-      "A concrete thing you shipped or improved",
-      "A number if you have one (users, % faster, etc.)",
+      "Built production workflows for permit processing and authorization systems",
+      "Worked on RBAC and authentication flows using Better Auth and Permit.io",
     ],
-    tags: ["Python", "React"],
+    tags: [
+      "TypeScript",
+      "React",
+      "TanStack Start",
+      "Drizzle ORM",
+      "RBAC",
+      "Permit.io",
+    ],
   },
   {
-    role: "Intern",
-    company: "Company Two — edit src/data/experience.ts",
-    location: "Remote",
-    period: "Dec 2024 – Feb 2025",
+    role: "Full Stack Development Intern",
+    company: "Carbon Sustain",
+    location: "Remote • Berkeley, CA",
+    period: "Jan 2025 – Jun 2025",
     summary:
-      "One or two sentences about what you built or worked on during this internship.",
-    tags: ["JavaScript"],
+      "Built frontend features for enterprise sustainability tooling at a UC Berkeley-funded startup focused on carbon emissions tracking and reporting.",
+    highlights: [
+      "Developed UI components and workflows using Angular",
+      "Worked alongside backend-integrated enterprise tooling systems",
+    ],
+    tags: [
+      "Angular",
+      "TypeScript",
+      "PostgreSQL",
+      "Frontend",
+    ],
   },
 ];
