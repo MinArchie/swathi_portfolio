@@ -74,7 +74,7 @@ const ENTRANCE: Partial<Record<LayerId, { delay: number; y: number }>> = {
 
 /** Original scroll offsets from script.js — do not change lightly. */
 function scrollOffset(id: LayerId, value: number, width: number) {
-  if (width > 600) {
+  if (width >= 768) {
     switch (id) {
       case "sun": return { x: 0, y: value * 0.5 };
       case "valley3": return { x: 0, y: value * 0.1 };
@@ -138,16 +138,16 @@ export default function ParallaxHero() {
         const el = layerRefs.current[id];
         if (!el) continue;
         const s = scrollOffset(id, value, width);
-        const mx = width > 600 ? mouse.x * MOUSE_DEPTH[id] : 0;
-        const my = width > 600 ? mouse.y * MOUSE_DEPTH[id] * 0.5 : 0;
+        const mx = width >= 768 ? mouse.x * MOUSE_DEPTH[id] : 0;
+        const my = width >= 768 ? mouse.y * MOUSE_DEPTH[id] * 0.5 : 0;
         el.style.transform = `translate(${s.x + mx}px, ${s.y + my}px)`;
       }
 
       if (textRef.current) {
         // original behaviour: the title sinks behind the valleys
         // slower sink on mobile so it stays visible through the longer 100svh hero
-        textRef.current.style.marginTop = `${value * (width <= 600 ? 1.0 : 2.5)}px`;
-        textRef.current.style.transform = width > 600
+        textRef.current.style.marginTop = `${value * (width < 768 ? 1.0 : 2.5)}px`;
+        textRef.current.style.transform = width >= 768
           ? `translate(${mouse.x * 12}px, ${mouse.y * 6}px)`
           : "";
       }
@@ -177,7 +177,7 @@ export default function ParallaxHero() {
         style={{ top: STATIC_TOP[id] }}
         /* 40px side / 20px top bleed so the cursor drift (max ±32px)
            never exposes a layer's edge. Mobile (no cursor) needs none. */
-        className="pointer-events-none absolute left-[-40px] top-[-20px] w-[calc(100%+80px)] will-change-transform max-[600px]:left-[-75%] max-[600px]:top-0 max-[600px]:w-[250%]"
+        className="pointer-events-none absolute left-0 top-0 w-[250%] will-change-transform md:left-[-40px] md:top-[-20px] md:w-[calc(100%+80px)]"
       >
         {/* Entrance lives on this inner wrapper so it never fights
             the rAF scroll/cursor transform on the outer div. */}
@@ -201,7 +201,7 @@ export default function ParallaxHero() {
   };
 
   return (
-    <section className="relative flex h-[100svh] items-center justify-center overflow-hidden bg-espresso lg:h-[130vh]">
+    <section className="relative flex h-[65vh] items-center justify-center overflow-hidden bg-espresso md:h-[100svh] lg:h-[130vh]">
       {/* DOM order matters: later layers are drawn on top, so the
           title sinks behind the front valleys as you scroll. */}
       {BACK_LAYERS.map(renderLayer)}
@@ -231,13 +231,13 @@ export default function ParallaxHero() {
       </motion.div>
 
       {/* Title block (sinks behind the valleys on scroll) */}
-      <div ref={textRef} className="absolute top-[13vh] px-4 text-center max-[600px]:top-[14vh]">
+      <div ref={textRef} className="absolute inset-x-0 top-[13vh] px-6 text-center md:px-4">
         <motion.h1
           initial="hidden"
           animate="show"
           transition={{ staggerChildren: 0.04, delayChildren: 0.25 }}
           aria-label={site.name}
-          className="font-display text-[3rem] font-semibold leading-none text-espresso [text-shadow:2px_2px_4px_rgba(0,0,0,0.2)] sm:text-[5rem] lg:text-[6.5rem]"
+          className="font-display text-[2.5rem] font-semibold leading-none text-espresso [text-shadow:2px_2px_4px_rgba(0,0,0,0.2)] md:text-[5rem] lg:text-[6.5rem]"
         >
           {site.name.split("").map((ch, i) => (
             <motion.span
@@ -254,7 +254,7 @@ export default function ParallaxHero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.6 }}
-          className="mt-4 text-sm font-semibold uppercase tracking-[0.35em] text-espresso/80 sm:text-base"
+          className="mt-4 text-xs font-semibold uppercase tracking-[0.1em] text-espresso/80 md:text-sm md:tracking-[0.35em]"
         >
           {site.tagline}
         </motion.p>
@@ -272,7 +272,7 @@ export default function ParallaxHero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2.7, duration: 0.8 }}
-        className="group absolute top-[calc(100svh-8.5rem)] z-20 flex cursor-pointer flex-col items-center gap-3 max-[600px]:top-auto max-[600px]:bottom-4"
+        className="group absolute bottom-6 z-20 flex cursor-pointer flex-col items-center gap-3 md:bottom-auto md:top-[calc(100svh-8.5rem)]"
       >
         <span className="text-[0.65rem] font-semibold uppercase tracking-[0.4em] text-cream/90 transition-colors group-hover:text-white">
           scroll
