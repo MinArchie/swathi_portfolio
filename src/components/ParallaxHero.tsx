@@ -54,6 +54,20 @@ const IDLE: Partial<Record<LayerId, string>> = {
 const BACK_LAYERS: LayerId[] = ["sky", "sun", "mountains", "valley1", "valley2", "birds"];
 const FRONT_LAYERS: LayerId[] = ["valley3", "valley4"];
 
+/**
+ * Entrance choreography: sky, sun and birds are present from the
+ * start (with the fireflies and the title), then the landscape
+ * rises into place back-to-front, as if the valley is waking up.
+ * Layers without an entry here just fade in immediately.
+ */
+const ENTRANCE: Partial<Record<LayerId, { delay: number; y: number }>> = {
+  mountains: { delay: 1.2, y: 45 },
+  valley1: { delay: 1.35, y: 60 },
+  valley2: { delay: 1.5, y: 75 },
+  valley3: { delay: 1.65, y: 90 },
+  valley4: { delay: 1.8, y: 110 },
+};
+
 /** Original scroll offsets from script.js — do not change lightly. */
 function scrollOffset(id: LayerId, value: number, width: number) {
   if (width > 600) {
@@ -145,24 +159,39 @@ export default function ParallaxHero() {
   const scrollDown = () =>
     document.getElementById("snapshot")?.scrollIntoView({ behavior: "smooth" });
 
-  const renderLayer = (id: LayerId) => (
-    <div
-      key={id}
-      ref={(el) => {
-        layerRefs.current[id] = el;
-      }}
-      style={{ top: STATIC_TOP[id] }}
-      /* 40px side / 20px top bleed so the cursor drift (max ±32px)
-         never exposes a layer's edge. Mobile (no cursor) needs none. */
-      className="pointer-events-none absolute left-[-40px] top-[-20px] w-[calc(100%+80px)] will-change-transform max-[600px]:left-0 max-[600px]:top-0 max-[600px]:w-[250%]"
-    >
-      <img
-        src={asset(`images/parallax/${id}.png`)}
-        alt=""
-        className={`w-full ${IDLE[id] ?? ""}`}
-      />
-    </div>
-  );
+  const renderLayer = (id: LayerId) => {
+    const entrance = ENTRANCE[id];
+    return (
+      <div
+        key={id}
+        ref={(el) => {
+          layerRefs.current[id] = el;
+        }}
+        style={{ top: STATIC_TOP[id] }}
+        /* 40px side / 20px top bleed so the cursor drift (max ±32px)
+           never exposes a layer's edge. Mobile (no cursor) needs none. */
+        className="pointer-events-none absolute left-[-40px] top-[-20px] w-[calc(100%+80px)] will-change-transform max-[600px]:left-0 max-[600px]:top-0 max-[600px]:w-[250%]"
+      >
+        {/* Entrance lives on this inner wrapper so it never fights
+            the rAF scroll/cursor transform on the outer div. */}
+        <motion.div
+          initial={entrance ? { opacity: 0, y: entrance.y } : { opacity: 0 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={
+            entrance
+              ? { delay: entrance.delay, duration: 0.9, ease: [0.22, 1, 0.36, 1] }
+              : { duration: 0.8 }
+          }
+        >
+          <img
+            src={asset(`images/parallax/${id}.png`)}
+            alt=""
+            className={`w-full ${IDLE[id] ?? ""}`}
+          />
+        </motion.div>
+      </div>
+    );
+  };
 
   return (
     <section className="relative flex h-[130vh] items-center justify-center overflow-hidden bg-espresso max-[600px]:h-[65vh]">
@@ -192,7 +221,7 @@ export default function ParallaxHero() {
         <motion.h1
           initial="hidden"
           animate="show"
-          transition={{ staggerChildren: 0.045, delayChildren: 0.5 }}
+          transition={{ staggerChildren: 0.04, delayChildren: 0.25 }}
           aria-label={site.name}
           className="font-display text-[3rem] font-semibold leading-none text-espresso [text-shadow:2px_2px_4px_rgba(0,0,0,0.2)] sm:text-[5rem] lg:text-[6.5rem]"
         >
@@ -210,7 +239,7 @@ export default function ParallaxHero() {
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.6, duration: 0.7 }}
+          transition={{ delay: 0.9, duration: 0.6 }}
           className="mt-4 text-sm font-semibold uppercase tracking-[0.35em] text-espresso/80 sm:text-base"
         >
           {site.tagline}
@@ -225,7 +254,7 @@ export default function ParallaxHero() {
         aria-label="Scroll down"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 2.2, duration: 0.8 }}
+        transition={{ delay: 2.7, duration: 0.8 }}
         className="group absolute top-[calc(100svh-8.5rem)] z-20 flex cursor-pointer flex-col items-center gap-3 max-[600px]:top-auto max-[600px]:bottom-4"
       >
         <span className="text-[0.65rem] font-semibold uppercase tracking-[0.4em] text-cream/90 transition-colors group-hover:text-white">
