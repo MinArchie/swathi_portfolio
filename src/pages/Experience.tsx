@@ -56,15 +56,15 @@ export default function Experience() {
                 >
                   <div className="flex">
                     {/* date stub */}
-                    <div className="flex w-14 shrink-0 items-center justify-center rounded-l-2xl border-r-2 border-dashed border-clay/30 bg-clay/10 py-6">
+                    <div className="flex w-10 shrink-0 items-center justify-center rounded-l-2xl border-r-2 border-dashed border-clay/30 bg-clay/10 py-6 sm:w-14">
                       <span className="rotate-180 whitespace-nowrap text-[0.65rem] font-bold uppercase tracking-[0.2em] text-clay [writing-mode:vertical-rl]">
                         {job.period}
                       </span>
                     </div>
 
                     {/* perforation notches */}
-                    <span className="absolute -top-2 left-14 size-4 -translate-x-1/2 rounded-full bg-background" />
-                    <span className="absolute -bottom-2 left-14 size-4 -translate-x-1/2 rounded-full bg-background" />
+                    <span className="absolute -top-2 left-10 size-4 -translate-x-1/2 rounded-full bg-background sm:left-14" />
+                    <span className="absolute -bottom-2 left-10 size-4 -translate-x-1/2 rounded-full bg-background sm:left-14" />
 
                     {/* details */}
                     <div className="flex-1 p-6">

@@ -41,7 +41,11 @@ const MOUSE_DEPTH: Record<LayerId, number> = {
  * valley4 = the deer + foreground ground.
  */
 const STATIC_TOP: Partial<Record<LayerId, string>> = {
-  valley4: "-7vw",
+  mountains: "-80px",
+  valley1: "-80px",
+  valley2: "-80px",
+  valley3: "-80px",
+  valley4: "calc(-12vw - 40px)",
 };
 
 /** Idle "alive" animation applied to the image inside each layer. */
@@ -96,12 +100,12 @@ function scrollOffset(id: LayerId, value: number, width: number) {
   return id === "sun" ? { x: 0, y: value * 0.5 } : { x: 0, y: 0 };
 }
 
-const FIREFLIES = Array.from({ length: 12 }, (_, i) => ({
-  left: `${(i * 83 + 11) % 100}%`,
-  top: `${28 + ((i * 37) % 45)}%`,
-  size: 3 + (i % 3) * 2,
-  delay: `${(i * 1.3) % 9}s`,
-  duration: `${8 + (i % 5) * 2}s`,
+const FIREFLIES = Array.from({ length: 38 }, (_, i) => ({
+  left: `${(i * 71 + 7) % 100}%`,
+  top: `${20 + ((i * 41 + 5) % 62)}%`,
+  size: 2 + (i % 3),
+  delay: `-${((i * 3.1 + 1.7) % 9).toFixed(1)}s`,
+  duration: `${7 + (i % 5) * 1.2}s`,
 }));
 
 const letterVariants = {
@@ -141,8 +145,11 @@ export default function ParallaxHero() {
 
       if (textRef.current) {
         // original behaviour: the title sinks behind the valleys
-        textRef.current.style.marginTop = `${value * 2.5}px`;
-        textRef.current.style.transform = `translate(${mouse.x * 12}px, ${mouse.y * 6}px)`;
+        // slower sink on mobile so it stays visible through the longer 100svh hero
+        textRef.current.style.marginTop = `${value * (width <= 600 ? 1.0 : 2.5)}px`;
+        textRef.current.style.transform = width > 600
+          ? `translate(${mouse.x * 12}px, ${mouse.y * 6}px)`
+          : "";
       }
 
       raf = requestAnimationFrame(tick);
@@ -170,7 +177,7 @@ export default function ParallaxHero() {
         style={{ top: STATIC_TOP[id] }}
         /* 40px side / 20px top bleed so the cursor drift (max ±32px)
            never exposes a layer's edge. Mobile (no cursor) needs none. */
-        className="pointer-events-none absolute left-[-40px] top-[-20px] w-[calc(100%+80px)] will-change-transform max-[600px]:left-0 max-[600px]:top-0 max-[600px]:w-[250%]"
+        className="pointer-events-none absolute left-[-40px] top-[-20px] w-[calc(100%+80px)] will-change-transform max-[600px]:left-[-75%] max-[600px]:top-0 max-[600px]:w-[250%]"
       >
         {/* Entrance lives on this inner wrapper so it never fights
             the rAF scroll/cursor transform on the outer div. */}
@@ -194,30 +201,37 @@ export default function ParallaxHero() {
   };
 
   return (
-    <section className="relative flex h-[130vh] items-center justify-center overflow-hidden bg-espresso max-[600px]:h-[65vh]">
+    <section className="relative flex h-[100svh] items-center justify-center overflow-hidden bg-espresso lg:h-[130vh]">
       {/* DOM order matters: later layers are drawn on top, so the
           title sinks behind the front valleys as you scroll. */}
       {BACK_LAYERS.map(renderLayer)}
 
-      {/* Fireflies drifting up through the scene */}
-      {FIREFLIES.map((f, i) => (
-        <span
-          key={i}
-          className="animate-firefly pointer-events-none absolute rounded-full bg-amber-100/90 blur-[1px]"
-          style={{
-            left: f.left,
-            top: f.top,
-            width: f.size,
-            height: f.size,
-            animationDelay: f.delay,
-            animationDuration: f.duration,
-            boxShadow: "0 0 8px 2px rgba(255, 226, 160, 0.55)",
-          }}
-        />
-      ))}
+      {/* Fireflies drifting up through the scene — fade in after the valley layers appear */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.6, duration: 1.4 }}
+        className="pointer-events-none absolute inset-0"
+      >
+        {FIREFLIES.map((f, i) => (
+          <span
+            key={i}
+            className="animate-firefly absolute rounded-full bg-yellow-100"
+            style={{
+              left: f.left,
+              top: f.top,
+              width: f.size,
+              height: f.size,
+              animationDelay: f.delay,
+              animationDuration: f.duration,
+              boxShadow: "0 0 5px 2px rgba(255, 248, 180, 1), 0 0 18px 6px rgba(255, 220, 80, 0.75)",
+            }}
+          />
+        ))}
+      </motion.div>
 
       {/* Title block (sinks behind the valleys on scroll) */}
-      <div ref={textRef} className="absolute top-[13vh] px-4 text-center max-[600px]:top-[9vh]">
+      <div ref={textRef} className="absolute top-[13vh] px-4 text-center max-[600px]:top-[14vh]">
         <motion.h1
           initial="hidden"
           animate="show"
@@ -247,6 +261,9 @@ export default function ParallaxHero() {
       </div>
 
       {FRONT_LAYERS.map(renderLayer)}
+
+      {/* Gradient fade into the section below */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-32 bg-gradient-to-t from-espresso to-transparent" />
 
       {/* Eye-catching scroll cue */}
       <motion.button

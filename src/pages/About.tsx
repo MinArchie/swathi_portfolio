@@ -12,19 +12,19 @@ export default function About() {
     <section className="mx-auto max-w-6xl px-6 pb-24 pt-32">
       <div className="grid items-center gap-16 md:grid-cols-2">
         {/* Photo with a slowly-rotating gradient halo */}
-        <Reveal className="relative mx-auto w-fit">
+        <Reveal className="relative mx-auto w-72 max-w-full sm:w-80">
           <div className="animate-spin-slow absolute -inset-6 rounded-[3rem] bg-[conic-gradient(from_0deg,rgba(145,111,111,0.45),transparent_30%,rgba(145,111,111,0.25),transparent_70%,rgba(145,111,111,0.45))]" />
           <img
             src={asset("images/random-lines.svg")}
             alt=""
-            className="absolute -left-12 -top-12 w-32 opacity-60"
+            className="absolute -left-12 -top-12 w-32 opacity-60 hidden sm:block"
           />
           <motion.img
             src={asset("images/mypic.jpg")}
             alt={site.name}
             whileHover={{ rotate: -2, scale: 1.02 }}
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
-            className="relative w-72 rounded-[2.5rem] object-cover shadow-2xl sm:w-80"
+            className="relative w-full rounded-[2.5rem] object-cover shadow-2xl"
           />
         </Reveal>
 

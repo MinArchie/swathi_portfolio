@@ -28,7 +28,7 @@ export default function Home() {
       <ParallaxHero />
 
       {/* ---------- 10-second snapshot ---------- */}
-      <section id="snapshot" className="bg-espresso px-6 py-24 text-cream">
+      <section id="snapshot" className="relative z-10 bg-espresso px-6 py-24 text-cream">
         <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.25fr_1fr]">
           <Reveal>
             <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.3em] text-clay-light">
@@ -41,14 +41,11 @@ export default function Home() {
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-cream/80">
               {site.pitch}
             </p>
-            <div className="mt-8 flex flex-nowrap items-center gap-3 overflow-x-auto">
+            <div className="mt-8 flex flex-wrap items-center gap-2">
               <Button asChild variant="accent" size="lg">
                 <Link to="/projects">
                   View projects <ArrowRight />
                 </Link>
-              </Button>
-              <Button asChild variant="outline-light" size="lg">
-                <Link to="/contact">Contact me</Link>
               </Button>
               {site.resume && (
                 <Button asChild variant="outline-light" size="lg">

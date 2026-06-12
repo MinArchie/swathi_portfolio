@@ -37,7 +37,7 @@ export default function Navbar() {
           : "bg-transparent"
       )}
     >
-      <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-8">
+      <div className="relative mx-auto flex max-w-7xl items-center px-4 py-3 sm:px-8">
         <Link to="/" className="shrink-0" onClick={() => setOpen(false)}>
           <img
             src={asset("images/logo.png")}
@@ -46,8 +46,8 @@ export default function Navbar() {
           />
         </Link>
 
-        {/* Desktop nav */}
-        <nav className="hidden items-center gap-1 md:flex">
+        {/* Desktop nav — absolutely centered so logo stays pinned left */}
+        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 md:flex">
           {links.map((link) => (
             <NavLink
               key={link.to}
