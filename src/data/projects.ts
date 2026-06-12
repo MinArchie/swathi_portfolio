@@ -17,6 +17,7 @@ export const projects: Project[] = [
     featured: false,
     github: "https://github.com/MinArchie/swathi_portfolio",
     demo: "https://minarchie.github.io/swathi_portfolio/",
+    image: "images/projects/portfolio.png",
   },
   {
     title: "XAI Malware Detection Extension",
@@ -32,6 +33,7 @@ export const projects: Project[] = [
     ],
     featured: true,
     github: "https://github.com/MinArchie/XAI-MalwareJs",
+    image: "images/projects/xai-project.png",
   },
   {
     title: "ESP32 Evil Twin Wi-Fi Research Platform",
@@ -47,6 +49,7 @@ export const projects: Project[] = [
     ],
     featured: true,
     github: "https://github.com/MinArchie/evil-twin-wifi",
+    image: "images/projects/evil-twin.png",
   },
   {
     title: "Malware Analysis Simulator",
@@ -61,5 +64,6 @@ export const projects: Project[] = [
     ],
     featured: true,
     github: "https://github.com/MinArchie/Malware-Anaysis-Simulator",
+    image: "images/projects/malware-analysis.png",
   },
 ];
